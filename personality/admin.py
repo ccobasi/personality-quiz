@@ -21,7 +21,10 @@ class AnswerInlineModel(admin.TabularInline):
     model = Answer
     fields = [
         'answer_text',
-        'is_right'
+        'is_inhibited_introvert',
+        'is_social_introvert',
+        'is_feeler_extrovert',
+        'is_thinker_extrovert',
     ]
 
 
@@ -45,6 +48,9 @@ class QuestionAdmin(admin.ModelAdmin):
 class AnswerAdmin(admin.ModelAdmin):
     list_display = [
         'answer_text',
-        'is_right',
+        'is_inhibited_introvert',
+        'is_social_introvert',
+        'is_feeler_extrovert',
+        'is_thinker_extrovert',
         'question'
     ]
