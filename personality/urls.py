@@ -5,5 +5,6 @@ from .views import *
 
 
 urlpatterns = [
-    path('', views.index, name='main-view'),
+    path('', Quiz.as_view(), name='quiz'),
+    path('q/<str:topic>/', QuizQuestion.as_view(), name='questions')
 ]

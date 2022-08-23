@@ -1,13 +1,19 @@
-from re import template
-from django.shortcuts import render
 from .models import *
-# from django.views.generic import ListView
-from django.http import HttpResponse
+from rest_framework import generics
+from rest_framework.response import Response
+from .serializers import *
+from rest_framework.views import APIView
 
 
-# class QuizListView(ListView):
-#     pass
+class Quiz(generics.ListAPIView):
 
-def index(request):
-    html = "<html><body><h1>Hello World</h1></body></html>"
-    return HttpResponse(html)
+    serializer_class = QuizSerializer
+    queryset = Quizzes.objects.all()
+
+
+class QuizQuestion(APIView):
+
+    def get(self, request, format=None, **kwargs):
+        quiz = Question.objects.filter(quiz__title=kwargs['topic'])
+        serializer = QuestionSerializer(quiz, many=True)
+        return Response(serializer.data)
