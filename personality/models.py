@@ -11,6 +11,11 @@ class Category(models.Model):
 
 class Quizzes(models.Model):
 
+    class Meta:
+        verbose_name = _("Quiz")
+        verbose_name_plural = _("Quizzes")
+        ordering = ['id']
+
     title = models.CharField(max_length=255, default=_(
         "New Quiz"), verbose_name=_("Quiz Title"))
     category = models.ForeignKey(
@@ -32,6 +37,11 @@ class Updated(models.Model):
 
 class Question(Updated):
 
+    class Meta:
+        verbose_name = _("Question")
+        verbose_name_plural = _("Questions")
+        ordering = ['id']
+
     TYPE = (
         (0, _('Multiple Choice')),
     )
@@ -51,6 +61,11 @@ class Question(Updated):
 
 
 class Answer(Updated):
+
+    class Meta:
+        verbose_name = _("Answer")
+        verbose_name_plural = _("Answers")
+        ordering = ['id']
 
     question = models.ForeignKey(
         Question, related_name='answer', on_delete=models.DO_NOTHING)
