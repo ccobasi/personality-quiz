@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import Footer from './Footer';
 import ConnectApi from '../services/ConnectApi';
 
 const Home = () => {
@@ -9,7 +10,10 @@ const Home = () => {
     console.log(dataState)
 
   return (
-    <div><Header/></div>
+    <div>
+        <Header/>
+        <Footer/>
+    </div>
   )
 }
 

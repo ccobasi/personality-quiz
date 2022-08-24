@@ -1,3 +1,4 @@
+from unicodedata import category
 from .models import *
 from rest_framework import generics
 from rest_framework.response import Response
@@ -9,6 +10,14 @@ class Quiz(generics.ListAPIView):
 
     serializer_class = QuizSerializer
     queryset = Quizzes.objects.all()
+
+
+# class StartQuiz(APIView):
+
+#     def get(self, request, **kwargs):
+#         quiz = Quizzes.objects.filter(category__name=kwargs['title'])
+#         serializer = QuizSerializer(quiz, many=True)
+#         return Response(serializer.data)
 
 
 class QuizList(APIView):
