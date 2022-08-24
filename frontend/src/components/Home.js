@@ -97,7 +97,7 @@ const Home = () => {
                 <CardContent>
                   <div className={classes.cardPricing}>
                     <Typography component="h2" variant="h6" color="textPrimary">
-                      Random Quiz
+                      Quiz
                     </Typography>
                   </div>
                   <ul>
@@ -115,7 +115,7 @@ const Home = () => {
                     fullWidth
                     variant="outlined"
                     color="primary"
-                    href="http://localhost:3000/r/personality"
+                    href="http://localhost:3000/q/Personality/"
                   >
                     Start Quiz
                   </Button>
