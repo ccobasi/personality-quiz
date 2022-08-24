@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-const collectData = (url) => {
+const ConnectApi = (url) => {
     const [fetch, setFetching] = useState({isFetching:false});
     const [dataState, setDataState] = useState({data:[]});
     const [apiurl] = useState(url);
@@ -25,4 +25,4 @@ const collectData = (url) => {
 
 }
 
-export default collectData;
+export default ConnectApi;
