@@ -71,35 +71,27 @@ const Quiz = () => {
   
     const checkAnswer = (e) => {
       e.preventDefault();
-  
-      // let n = a.map((obj) => obj.is_right);
-      // let y = { ...n };
 
-      let b = a.map((obj) => obj.is_inhibited_introvert);
-      let c = a.map((obj) => obj.is_social_introvert);
-      let d = a.map((obj) => obj.is_feeler_extrovert);
-      let f = a.map((obj) => obj.is_thinker_extrovert);
-
-      let y = {...b};
+    //   let n = a.map((obj) => obj.is_introvert);
+    //   let y = {...n};
   
-      function arrayEquals(o, p) {
-        return (
-          Array.isArray(o) &&
-          Array.isArray(p) &&
-          o.length === p.length &&
-          o.every((val, index) => val === p[index])
-        );
-      }
+    //   function arrayEquals(o, p) {
+    //     return (
+    //       Array.isArray(o) &&
+    //       Array.isArray(p) &&
+    //       o.length === p.length &&
+    //       o.every((val, index) => val === p[index])
+    //     );
+    //   }
   
-      let o = Object.values(y);
-      let p = Object.values(answer);
-      if (arrayEquals(o, p)) {
-          setAnswerCheck(true);
-      } else {
-          setAnswerCheck(false);
-      }
+    //   let o = Object.values(y);
+    //   let p = Object.values(answer);
+    //   if (arrayEquals(o, p)) {
+    //       setAnswerCheck(true);
+    //   } else {
+    //       setAnswerCheck(false);
+    //   }
     };
-
 
     function refreshPage() {
         window.location.reload(false);
@@ -132,7 +124,7 @@ const Quiz = () => {
         <>
         <React.Fragment>
         <Header/>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs">``
         <div className={classes.paper}>
           {dataState.data.map(({ title, answer }, i) => (
             <div key={i}>
@@ -173,5 +165,6 @@ const Quiz = () => {
         </>
     )
 }
+
 
 export default Quiz;

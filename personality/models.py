@@ -71,10 +71,7 @@ class Answer(Updated):
         Question, related_name='answer', on_delete=models.DO_NOTHING)
     answer_text = models.CharField(
         max_length=255, verbose_name=_("Answer Text"))
-    is_inhibited_introvert = models.BooleanField(default=False)
-    is_social_introvert = models.BooleanField(default=False)
-    is_feeler_extrovert = models.BooleanField(default=False)
-    is_thinker_extrovert = models.BooleanField(default=False)
+    is_introvert = models.BooleanField(default=False)
 
     def __str__(self):
         return self.answer_text
