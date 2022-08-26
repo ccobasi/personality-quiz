@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import { useParams } from "react-router-dom";
 import ConnectApi from "./ConnectApi";
 import Header from "../components/Header";
@@ -44,7 +44,6 @@ const Quiz = () => {
     const API_URL = "http://127.0.0.1:8000/personality/q/"+topic;
     const [dataState] = ConnectApi(API_URL);
 
-    console.log(dataState)
 
     const a = dataState.data.flatMap((q) => q.answer);
     const ac = a.length
@@ -73,8 +72,15 @@ const Quiz = () => {
     const checkAnswer = (e) => {
       e.preventDefault();
   
-      let n = a.map((obj) => obj.is_right);
-      let y = { ...n };
+      // let n = a.map((obj) => obj.is_right);
+      // let y = { ...n };
+
+      let b = a.map((obj) => obj.is_inhibited_introvert);
+      let c = a.map((obj) => obj.is_social_introvert);
+      let d = a.map((obj) => obj.is_feeler_extrovert);
+      let f = a.map((obj) => obj.is_thinker_extrovert);
+
+      let y = {...b};
   
       function arrayEquals(o, p) {
         return (
@@ -93,6 +99,34 @@ const Quiz = () => {
           setAnswerCheck(false);
       }
     };
+
+
+    function refreshPage() {
+        window.location.reload(false);
+      }
+    
+      function Result() {
+        if (answerCheck === true) {
+          return (
+            <Alert severity="success">
+              <AlertTitle>Corrent Answer</AlertTitle>
+              Well done you got it right —{" "}
+              <Link href="#" variant="body2" onClick={refreshPage}>
+                {"Next Question"}
+              </Link>
+            </Alert>
+          );
+        } else if (answerCheck === false) {
+          return (
+            <Alert severity="error">
+              <AlertTitle>Wrong Answer</AlertTitle>
+              Please try again!
+            </Alert>
+          );
+        } else {
+          return <React.Fragment></React.Fragment>;
+        }
+      }
 
     return (
         <>
@@ -129,7 +163,7 @@ const Quiz = () => {
               >
                 Submit Answer
               </Button>
-              {/* <Result /> */}
+              <Result />
             </div>
           ))}
         </div>

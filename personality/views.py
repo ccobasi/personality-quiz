@@ -39,6 +39,7 @@ class RandomQuestion(APIView):
 class QuizQuestion(APIView):
 
     def get(self, request, format=None, **kwargs):
-        quiz = Question.objects.filter(quiz__title=kwargs['topic'])
+        quiz = Question.objects.filter(
+            quiz__title=kwargs['topic']).order_by('?')[:1]
         serializer = QuestionSerializer(quiz, many=True)
         return Response(serializer.data)
