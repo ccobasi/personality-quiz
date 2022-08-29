@@ -12,7 +12,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Quiz = () => {
-    const classes = useStyles();
+    let classes = useStyles();
     const {topic} = useParams();
 
     const API_URL = "http://127.0.0.1:8000/personality/q/"+topic;
@@ -72,25 +71,25 @@ const Quiz = () => {
     const checkAnswer = (e) => {
       e.preventDefault();
 
-    //   let n = a.map((obj) => obj.is_introvert);
-    //   let y = {...n};
+      let n = a.map((obj) => obj.is_introvert);
+      let y = {...n};
   
-    //   function arrayEquals(o, p) {
-    //     return (
-    //       Array.isArray(o) &&
-    //       Array.isArray(p) &&
-    //       o.length === p.length &&
-    //       o.every((val, index) => val === p[index])
-    //     );
-    //   }
+      function arrayEquals(o, p) {
+        return (
+          Array.isArray(o) &&
+          Array.isArray(p) &&
+          o.length === p.length &&
+          o.every((val, index) => val === p[index])
+        );
+      }
   
-    //   let o = Object.values(y);
-    //   let p = Object.values(answer);
-    //   if (arrayEquals(o, p)) {
-    //       setAnswerCheck(true);
-    //   } else {
-    //       setAnswerCheck(false);
-    //   }
+      let o = Object.values(y);
+      let p = Object.values(answer);
+      if (arrayEquals(o, p)) {
+          setAnswerCheck(true);
+      } else {
+          setAnswerCheck(false);
+      }
     };
 
     function refreshPage() {
