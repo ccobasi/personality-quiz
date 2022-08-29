@@ -48,3 +48,12 @@ class AnswerAdmin(admin.ModelAdmin):
         'is_introvert',
         'question'
     ]
+
+
+@admin.register(Result)
+class ResultAdmin(admin.ModelAdmin):
+    list_display = [
+        'quiz',
+        'user',
+        'score'
+    ]

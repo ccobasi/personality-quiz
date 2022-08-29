@@ -68,29 +68,29 @@ const Quiz = () => {
       return object;
     };
   
-    const checkAnswer = (e) => {
-      e.preventDefault();
+    // const checkAnswer = (e) => {
+    //   e.preventDefault();
 
-      let n = a.map((obj) => obj.is_introvert);
-      let y = {...n};
+    //   let n = a.map((obj) => obj.is_introvert);
+    //   let y = {...n};
   
-      function arrayEquals(o, p) {
-        return (
-          Array.isArray(o) &&
-          Array.isArray(p) &&
-          o.length === p.length &&
-          o.every((val, index) => val === p[index])
-        );
-      }
+    //   function arrayEquals(o, p) {
+    //     return (
+    //       Array.isArray(o) &&
+    //       Array.isArray(p) &&
+    //       o.length === p.length &&
+    //       o.every((val, index) => val === p[index])
+    //     );
+    //   }
   
-      let o = Object.values(y);
-      let p = Object.values(answer);
-      if (arrayEquals(o, p)) {
-          setAnswerCheck(true);
-      } else {
-          setAnswerCheck(false);
-      }
-    };
+    //   let o = Object.values(y);
+    //   let p = Object.values(answer);
+    //   if (arrayEquals(o, p)) {
+    //       setAnswerCheck(true);
+    //   } else {
+    //       setAnswerCheck(false);
+    //   }
+    // };
 
     function refreshPage() {
         window.location.reload(false);
@@ -150,7 +150,7 @@ const Quiz = () => {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={checkAnswer}
+                onClick={refreshPage}
               >
                 Submit Answer
               </Button>
