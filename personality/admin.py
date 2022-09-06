@@ -20,6 +20,7 @@ class QuizAdmin(admin.ModelAdmin):
 class AnswerInlineModel(admin.TabularInline):
     model = Answer
     fields = [
+
         'answer_text',
         'is_introvert',
     ]
@@ -44,6 +45,7 @@ class QuestionAdmin(admin.ModelAdmin):
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     list_display = [
+        'id',
         'answer_text',
         'is_introvert',
         'question'

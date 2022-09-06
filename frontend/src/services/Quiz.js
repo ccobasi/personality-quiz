@@ -37,131 +37,111 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Quiz = () => {
-    let classes = useStyles();
-    const {topic} = useParams();
+  let classes = useStyles();
+  const {topic} = useParams();
 
-    const API_URL = "http://127.0.0.1:8000/personality/q/"+topic;
-    const [dataState] = ConnectApi(API_URL);
+  const API_URL = "http://127.0.0.1:8000/personality/q/"+topic;
+  const [dataState] = ConnectApi(API_URL);
 
+  const a = dataState.data.flatMap((q) => q.answer);
+  const ac = a.length
+  const [answer, setAnswer] = useState({});
+  const [answerCheck, setAnswerCheck] = useState();
 
-    const a = dataState.data.flatMap((q) => q.answer);
-    const ac = a.length
-    const [answer, setAnswer] = useState({});
-    const [answerCheck, setAnswerCheck] = useState();
-  
-    useEffect(() => {
-      if (Object.keys(answer).length === 0) {
-        setAnswer(createInitalAnswers());
-      }
-    }, [answer]);
-  
-    const handleSelection = (e) => {
-      setAnswer({ ...answer, [e.target.value]: e.target.checked });
-    };
-  
-    const createInitalAnswers = () => {
-      let z = a.flatMap((obj) => obj.id);
-      var object = {};
-      for (var x = 0; x < ac; x++) {
-        object[z[x]] = false;
-      }
-      return object;
-    };
-  
-    // const checkAnswer = (e) => {
-    //   e.preventDefault();
+  console.log(a);
 
-    //   let n = a.map((obj) => obj.is_introvert);
-    //   let y = {...n};
-  
-    //   function arrayEquals(o, p) {
-    //     return (
-    //       Array.isArray(o) &&
-    //       Array.isArray(p) &&
-    //       o.length === p.length &&
-    //       o.every((val, index) => val === p[index])
-    //     );
-    //   }
-  
-    //   let o = Object.values(y);
-    //   let p = Object.values(answer);
-    //   if (arrayEquals(o, p)) {
-    //       setAnswerCheck(true);
-    //   } else {
-    //       setAnswerCheck(false);
-    //   }
-    // };
+  useEffect(() => {
+    if (Object.keys(answer).length === 0) {
+      setAnswer(createInitalAnswers());
+    }
+  }, [answer]);
 
-    function refreshPage() {
-        window.location.reload(false);
-      }
+  const handleSelection = (e) => {
+    setAnswer({ ...answer, [e.target.value]: e.target.checked });
+  };
+
+  const createInitalAnswers = () => {
+    let z = a.flatMap((obj) => obj.id);
+    var object = {};
+    for (var x = 0; x < ac; x++) {
+      object[z[x]] = false;
+    }
+    return object;
+  };
+
+  const checkAnswer = (e) => {
+    e.preventDefault();
+
+    let n = a.map((obj) => obj.is_introvert);
+    let y = {...n};
+
+    console.log(y);
+    console.log(answer);
     
-      function Result() {
-        if (answerCheck === true) {
-          return (
-            <Alert severity="success">
-              <AlertTitle>Corrent Answer</AlertTitle>
-              Well done you got it right —{" "}
-              <Link href="#" variant="body2" onClick={refreshPage}>
-                {"Next Question"}
-              </Link>
-            </Alert>
-          );
-        } else if (answerCheck === false) {
-          return (
-            <Alert severity="error">
-              <AlertTitle>Wrong Answer</AlertTitle>
-              Please try again!
-            </Alert>
-          );
-        } else {
-          return <React.Fragment></React.Fragment>;
-        }
-      }
 
-    return (
-        <>
-        <React.Fragment>
+    function arrayEquals(o, p) {
+      return (
+        Array.isArray(o) &&
+        Array.isArray(p) &&
+        o.length === p.length &&
+        o.every((val, index) => val === p[index])
+      );
+    }
+
+    let o = Object.values(y);
+    let p = Object.values(answer);
+    if (arrayEquals(o, p)) {
+        // setAnswerCheck(true);
+        console.log('correct')
+    } else {
+        // setAnswerCheck(false);
+        console.log('incorrect')
+    }
+  };
+
+    return(
+      <>
+      <React.Fragment>
         <Header/>
-        <Container component="main" maxWidth="xs">``
-        <div className={classes.paper}>
-          {dataState.data.map(({ title, answer }, i) => (
-            <div key={i}>
-              <Typography component="h1" variant="h5">
-                {title}
-              </Typography>
-              {answer.map(({ answer_text, id }) => (
-                <RadioGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        value={id}
-                        color="primary"
-                        onChange={handleSelection}
+            <Container component="main" maxWidth="xs">``
+            <div className={classes.paper}>
+              {dataState.data.map(({ title, answer }, i) => (
+                <div key={i}>
+                  <Typography component="h1" variant="h5">
+                    {title}
+                  </Typography>
+                  {answer.map(({ answer_text, id }) => (
+                    <RadioGroup>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            value={id}
+                            color="primary"
+                            onChange={handleSelection}
+                          />
+                        }
+                        label={answer_text}
                       />
-                    }
-                    label={answer_text}
-                  />
-                </RadioGroup>
+                    </RadioGroup>
+                  ))}
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    onClick={checkAnswer}
+                  >
+                    Submit Answer
+                  </Button>
+                  {/* <Result /> */}
+                </div>
               ))}
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={refreshPage}
-              >
-                Submit Answer
-              </Button>
-              <Result />
             </div>
-          ))}
-        </div>
-      </Container>
+          </Container>
         <Footer/>
-        </React.Fragment>
-        </>
+      </React.Fragment>
+      </>
     )
 }
 
